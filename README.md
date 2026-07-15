@@ -16,9 +16,14 @@
 
 ## Overview
 
-This project implements a production-grade Automotive HMI system that combines a **digital Instrument Cluster** and an **Infotainment** system into a unified dashboard. It is designed for embedded Linux environments (Ubuntu 24.04) with GPU-accelerated rendering targeting a stable **60 FPS**.
+The Automotive HMI Dashboard is a production-grade, unified human-machine interface designed for next-generation vehicles. It seamlessly integrates a **safety-critical digital Instrument Cluster** with a **feature-rich Infotainment system** into a single cohesive display. 
 
-The architecture strictly adheres to **SOLID principles**, employs the **MVVM pattern** with Qt's signal/slot mechanism, and incorporates **ISO 26262 functional safety** features including watchdog monitoring, data integrity checks, and ASIL/QM component separation.
+Engineered for embedded Linux environments (e.g., Ubuntu 24.04), the dashboard leverages hardware-accelerated OpenGL rendering via the Qt Quick Scene Graph to deliver a fluid and uncompromising **60 FPS** user experience.
+
+At its core, the project demonstrates how to build robust automotive software that scales. The architecture is driven by three foundational pillars:
+- **Strict SOLID Compliance**: Ensuring long-term maintainability, testability, and clear architectural boundaries across the codebase.
+- **MVVM Architecture**: Cleanly decoupling business logic and hardware services from the QML frontend using Qt's robust signal/slot mechanism.
+- **ISO 26262 Functional Safety**: Implementing critical safety mechanisms—including ASIL/QM component isolation, SAE J1850 CRC-8 data integrity validation, and multi-threaded software watchdog monitoring—to guarantee fail-safe operation.
 
 <div align="center">
 
@@ -30,23 +35,23 @@ The architecture strictly adheres to **SOLID principles**, employs the **MVVM pa
 │  │     INSTRUMENT CLUSTER        │  │      INFOTAINMENT          │  │
 │  │        (ASIL B/C)             │  │         (QM)               │  │
 │  │                               │  │                            │  │
-│  │  ┌──────────┐ ┌──────────┐   │  │  ┌──────────────────────┐  │  │
-│  │  │Speedometer│ │Tachometer│   │  │  │   Climate Control    │  │  │
-│  │  │  0-280   │ │  0-8000  │   │  │  │  Driver ◉ Passenger  │  │  │
-│  │  │  km/h    │ │   RPM    │   │  │  │  22.0°C    22.0°C    │  │  │
-│  │  └──────────┘ └──────────┘   │  │  └──────────────────────┘  │  │
+│  │  ┌───────────┐  ┌──────────┐  │  │  ┌──────────────────────┐  │  │
+│  │  │Speedometer│  │Tachometer│  │  │  │   Climate Control    │  │  │
+│  │  │  0-280    │  │  0-8000  │  │  │  │  Driver (o) Passenger│  │  │
+│  │  │  km/h     │  │   RPM    │  │  │  │  22.0 C    22.0 C    │  │  │
+│  │  └───────────┘  └──────────┘  │  │  └──────────────────────┘  │  │
 │  │                               │  │  ┌──────────────────────┐  │  │
-│  │  ⚙ ◎ ◉ ⊘ ⊛ ◈ ◀ ▶ ⊞ ◆ ◇ ▣   │  │  │    Media Player      │  │  │
-│  │  [Tell-tale Warning Lights]   │  │  │  ♫ Midnight Drive     │  │  │
-│  │                               │  │  │  ▶ ━━━━━━━━━━◉━━     │  │  │
-│  │  ┌──────────────────────────┐ │  │  └──────────────────────┘  │  │
-│  │  │  ADAS Object Detection   │ │  │  ┌──────────────────────┐  │  │
-│  │  │  Vehicle 95% │ Ped 87%  │ │  │  │  Vehicle Settings     │  │  │
-│  │  └──────────────────────────┘ │  │  │  🔒 Door Locks        │  │  │
-│  └───────────────────────────────┘  │  │  💡 Ambient Lighting   │  │  │
-│                                      │  └──────────────────────┘  │  │
-│  ═══════════════════════════════════════════════════════════════╡  │
-│  [ NORMAL ]  [ SPORT ]  [ PARKING ]            Mode Selector    │  │
+│  │  (A) (!) (P) <--> (B) (T) (*) │  │  │    Media Player      │  │  │
+│  │  [Tell-tale Warning Lights]   │  │  │  [#] Midnight Drive  │  │  │
+│  │                               │  │  │  > ----------o--     │  │  │
+│  │  ┌─────────────────────────┐  │  │  └──────────────────────┘  │  │
+│  │  │  ADAS Object Detection  │  │  │  ┌──────────────────────┐  │  │
+│  │  │ Vehicle 95% | Ped 87%   │  │  │  │  Vehicle Settings    │  │  │
+│  │  └─────────────────────────┘  │  │  │  [L] Door Locks      │  │  │
+│  └───────────────────────────────┘  │  │  [*] Ambient Lighting│  │  │
+│                                     │  └──────────────────────┘  │  │
+│  ════════════════════════════════════════════════════════════════╡  │
+│  [ NORMAL ]  [ SPORT ]  [ PARKING ]                 Mode Selector   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
