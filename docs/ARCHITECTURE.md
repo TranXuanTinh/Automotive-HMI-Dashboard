@@ -59,9 +59,107 @@ graph TD
     Media -.-> Interfaces
 ```
 
+### Core Class Diagram
+
+The class structure relies heavily on abstract interfaces to decouple the hardware/simulation layer from the ViewModels, enabling easy mocking and hardware swapping.
+
+```mermaid
+classDiagram
+    direction TB
+    
+    class IVehicleBus {
+        <<Interface>>
+        +speedChanged(VehicleData data)
+        +rpmChanged(VehicleData data)
+    }
+    class IAdasSensor {
+        <<Interface>>
+        +objectsDetected(AdasFrame frame)
+    }
+    class IAdasProcessingStrategy {
+        <<Interface>>
+        +process(rawFrame)
+    }
+    
+    class SimulatedCanBus
+    class SimulatedAdasPipeline
+    class YoloProcessingStrategy
+    
+    IVehicleBus <|.. SimulatedCanBus : implements
+    IAdasSensor <|.. SimulatedAdasPipeline : implements
+    IAdasProcessingStrategy <|.. YoloProcessingStrategy : implements
+    SimulatedAdasPipeline *-- IAdasProcessingStrategy : strategy pattern
+    
+    class SpeedViewModel {
+        +real speed
+        +QString speedText
+        +toggleUnit()
+    }
+    class AdasViewModel {
+        +int objectCount
+    }
+    
+    SpeedViewModel --> IVehicleBus : observes via Signals
+    AdasViewModel --> IAdasSensor : observes via Signals
+```
+
 ---
 
-## 2. SOLID Principles Implementation
+## 2. System Dynamics & Flows
+
+### Telemetry Data Flow (Sequence Diagram)
+This sequence illustrates how raw hardware data travels through safety validations, is processed by the ViewModel, and finally rendered in QML.
+
+```mermaid
+sequenceDiagram
+    participant Hardware as CAN Bus
+    participant Service as SimulatedCanBus
+    participant Integrity as DataIntegrity
+    participant VM as SpeedViewModel
+    participant UI as QML Frontend
+
+    Hardware->>Service: Rx Frame (ID 0x100)
+    Service->>Integrity: validate(frame.crc, frame.aliveCounter)
+    
+    alt Valid Frame
+        Integrity-->>Service: true
+        Service->>Service: parseSpeed()
+        Service->>VM: emit speedUpdate(newSpeed)
+        VM->>VM: format speed string
+        VM->>UI: emit speedTextChanged()
+        UI->>UI: Update Gauge RotationAnimator
+    else Invalid Frame (Corrupt/Stale)
+        Integrity-->>Service: false
+        Service->>Service: Drop frame, log error
+    end
+```
+
+### Dashboard State Machine
+The `DashboardStateManager` implements a state machine to handle layout and styling transitions. A global fallback to `Safe Mode` is triggered if safety constraints (like the Watchdog timer) are violated.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Normal
+    
+    Normal --> Sport : User Selects Sport
+    Normal --> Parking : Gear shifted to R
+    
+    Sport --> Normal : User Selects Normal
+    Sport --> Parking : Gear shifted to R
+    
+    Parking --> Normal : Gear shifted to D
+    Parking --> Sport : User Selects Sport
+    
+    Normal --> SafeMode : Watchdog Timeout
+    Sport --> SafeMode : Watchdog Timeout
+    Parking --> SafeMode : Watchdog Timeout
+    
+    SafeMode --> Normal : System Reboot / Recovery
+```
+
+---
+
+## 3. SOLID Principles Implementation
 
 The architecture was explicitly designed to adhere to SOLID principles to ensure maintainability, testability, and scalability over a vehicle's 10-15 year lifecycle.
 
@@ -95,7 +193,7 @@ High-level modules should not depend on low-level modules; both should depend on
 
 ---
 
-## 3. Design Patterns Catalog
+## 4. Design Patterns Catalog
 
 | Pattern | Location | Problem Solved |
 |---------|----------|----------------|
@@ -107,7 +205,7 @@ High-level modules should not depend on low-level modules; both should depend on
 
 ---
 
-## 4. Functional Safety (ISO 26262)
+## 5. Functional Safety (ISO 26262)
 
 The system incorporates several features required for safety-critical automotive software (ASIL B/C).
 
@@ -139,7 +237,7 @@ If `DashboardStateManager::activateSafeMode()` is triggered, the UI aggressively
 
 ---
 
-## 5. CMake & Build Architecture
+## 6. CMake & Build Architecture
 
 The build system follows the latest Qt 6 best practices:
 1. `qt_standard_project_setup()` is used for modern compiler flags and directory structures.
