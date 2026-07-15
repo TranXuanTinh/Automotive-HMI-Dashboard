@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QQmlEngine>
 #include <QQuickStyle>
 #include <QDebug>
 
@@ -109,6 +110,8 @@ int main(int argc, char *argv[])
     // ── Expose ViewModels to QML (via context properties for singleton VMs) ──
     QQmlApplicationEngine engine;
 
+    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/qml/HmiDashboard/Theme.qml")), "HmiDashboard", 1, 0, "Theme");
+
     QQmlContext *ctx = engine.rootContext();
     ctx->setContextProperty(QStringLiteral("speedViewModel"), &speedVm);
     ctx->setContextProperty(QStringLiteral("rpmViewModel"), &rpmVm);
@@ -120,10 +123,12 @@ int main(int argc, char *argv[])
     ctx->setContextProperty(QStringLiteral("dashboardState"), &stateManager);
 
     // ── Load QML ────────────────────────────────────────────────────────
-    const QUrl url(QStringLiteral("qrc:/qt/qml/HmiDashboard/Main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
-                     &app, []() { QCoreApplication::exit(-1); },
-                     Qt::QueuedConnection);
+    const QUrl url(QStringLiteral("qrc:/qml/HmiDashboard/Main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+    }, Qt::QueuedConnection);
     engine.load(url);
 
     if (engine.rootObjects().isEmpty())

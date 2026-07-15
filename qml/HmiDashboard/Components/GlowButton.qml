@@ -1,5 +1,6 @@
-import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import HmiDashboard 1.0
 
 Button {
     id: root
@@ -60,12 +61,12 @@ Button {
         State {
             name: "hovered"
             when: root.hovered && !root.pressed
-            PropertyChanges { root.glowIntensity: 0.5 }
+            PropertyChanges { target: root; glowIntensity: 0.5 }
         },
         State {
             name: "pressed"
             when: root.pressed
-            PropertyChanges { root.glowIntensity: 1.0 }
+            PropertyChanges { target: root; glowIntensity: 1.0 }
         }
     ]
 

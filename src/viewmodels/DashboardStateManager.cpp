@@ -19,15 +19,15 @@ QString DashboardStateManager::currentState() const
     return QStringLiteral("normal");
 }
 
-QString DashboardStateManager::accentColor() const
+QColor DashboardStateManager::accentColor() const
 {
     switch (m_state) {
-    case State::Normal:   return QStringLiteral("#00D4FF");  // cyan
-    case State::Sport:    return QStringLiteral("#FF3D57");  // red
-    case State::Parking:  return QStringLiteral("#00E676");  // green
-    case State::SafeMode: return QStringLiteral("#FFB800");  // amber
+    case State::Normal:   return QColor(QStringLiteral("#00D4FF"));  // cyan
+    case State::Sport:    return QColor(QStringLiteral("#FF3D57"));  // red
+    case State::Parking:  return QColor(QStringLiteral("#00E676"));  // green
+    case State::SafeMode: return QColor(QStringLiteral("#FFB800"));  // amber
     }
-    return QStringLiteral("#00D4FF");
+    return QColor(QStringLiteral("#00D4FF"));
 }
 
 bool DashboardStateManager::isClusterVisible() const

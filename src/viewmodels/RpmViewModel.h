@@ -2,14 +2,14 @@
 #define VIEWMODELS_RPMVIEWMODEL_H
 
 #include <QObject>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 
 namespace hmi {
 
 class RpmViewModel : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(double rpm READ rpm NOTIFY rpmChanged)
     Q_PROPERTY(double normalizedRpm READ normalizedRpm NOTIFY rpmChanged)

@@ -2,14 +2,14 @@
 #define VIEWMODELS_SPEEDVIEWMODEL_H
 
 #include <QObject>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 
 namespace hmi {
 
 class SpeedViewModel : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(double speed READ speed NOTIFY speedChanged)
     Q_PROPERTY(double normalizedSpeed READ normalizedSpeed NOTIFY speedChanged)

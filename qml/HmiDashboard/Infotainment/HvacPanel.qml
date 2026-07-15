@@ -1,6 +1,7 @@
-import QtQuick
-import QtQuick.Layouts
-import HmiDashboard.Components
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import "../Components"
+import HmiDashboard 1.0
 
 Item {
     id: root
@@ -50,9 +51,9 @@ Item {
                     color: Theme.surface
                     border.width: 2
                     border.color: Qt.rgba(
-                                      Qt.color(dashboardState.accentColor).r,
-                                      Qt.color(dashboardState.accentColor).g,
-                                      Qt.color(dashboardState.accentColor).b, 0.4)
+                                      dashboardState.accentColor.r,
+                                      dashboardState.accentColor.g,
+                                      dashboardState.accentColor.b, 0.4)
 
                     Column {
                         anchors.centerIn: parent
@@ -100,7 +101,7 @@ Item {
             // ── Center controls ─────────────────────────────────────────
             ColumnLayout {
                 Layout.fillHeight: true
-                Layout.preferredWidth: 100
+                Layout.preferredWidth: 240
                 spacing: Theme.spacingSm
 
                 // Fan speed
@@ -141,6 +142,16 @@ Item {
                         text: "+"; width: 36; height: 32; borderRadius: 8
                         onClicked: hvacViewModel.setFanSpeed(hvacViewModel.fanSpeed + 1)
                     }
+                }
+
+                Item { Layout.fillHeight: true }
+
+                Image {
+                    source: "qrc:/qml/HmiDashboard/assets/vinfast_vf8.png"
+                    Layout.preferredWidth: 220
+                    Layout.preferredHeight: 220
+                    fillMode: Image.PreserveAspectFit
+                    Layout.alignment: Qt.AlignHCenter
                 }
 
                 Item { Layout.fillHeight: true }
@@ -197,9 +208,9 @@ Item {
                     color: Theme.surface
                     border.width: 2
                     border.color: Qt.rgba(
-                                      Qt.color(dashboardState.accentColor).r,
-                                      Qt.color(dashboardState.accentColor).g,
-                                      Qt.color(dashboardState.accentColor).b, 0.4)
+                                      dashboardState.accentColor.r,
+                                      dashboardState.accentColor.g,
+                                      dashboardState.accentColor.b, 0.4)
                     opacity: hvacViewModel.isSyncOn ? 0.5 : 1.0
 
                     Column {

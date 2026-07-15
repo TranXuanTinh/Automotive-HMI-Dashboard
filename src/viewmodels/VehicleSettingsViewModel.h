@@ -4,14 +4,14 @@
 #include <QObject>
 #include <QColor>
 #include <QVariantList>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 
 namespace hmi {
 
 class VehicleSettingsViewModel : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(QVariantList doorLockStates READ doorLockStates NOTIFY doorLocksChanged)
     Q_PROPERTY(QColor ambientColor READ ambientColor NOTIFY ambientChanged)

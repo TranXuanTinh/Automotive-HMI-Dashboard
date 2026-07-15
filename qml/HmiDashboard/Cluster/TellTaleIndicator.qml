@@ -1,4 +1,5 @@
-import QtQuick
+import QtQuick 2.15
+import HmiDashboard 1.0
 
 Item {
     id: root
@@ -7,7 +8,7 @@ Item {
     required property string iconSource
     required property int state   // 0=Off, 1=On, 2=Blinking, 3=Error
     required property bool isActive
-    required property string color
+    required property color color
     required property bool isBlinking
 
     implicitWidth: 36
@@ -39,9 +40,9 @@ Item {
             radius: 16
             anchors.horizontalCenter: parent.horizontalCenter
             color: root.isActive ? Qt.rgba(
-                       Qt.color(root.color).r,
-                       Qt.color(root.color).g,
-                       Qt.color(root.color).b, 0.2)
+                       root.color.r,
+                       root.color.g,
+                       root.color.b, 0.2)
                    : "transparent"
             border.width: 1
             border.color: root.isActive ? root.color : Theme.textDim

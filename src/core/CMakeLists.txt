@@ -1,4 +1,4 @@
-qt_add_library(hmi_core STATIC
+add_library(hmi_core STATIC
     src/DataIntegrity.cpp
     src/WatchdogTimer.cpp
     include/core/VehicleData.h
@@ -26,5 +26,5 @@ target_include_directories(hmi_core
 
 target_link_libraries(hmi_core
     PUBLIC
-        Qt6::Core
+        Qt5::Core
 )

@@ -2,7 +2,8 @@
 #define VIEWMODELS_DASHBOARDSTATEMANAGER_H
 
 #include <QObject>
-#include <QtQmlIntegration/qqmlintegration.h>
+#include <QColor>
+
 
 namespace hmi {
 
@@ -12,10 +13,10 @@ namespace hmi {
 class DashboardStateManager : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(QString currentState READ currentState NOTIFY stateChanged)
-    Q_PROPERTY(QString accentColor READ accentColor NOTIFY stateChanged)
+    Q_PROPERTY(QColor accentColor READ accentColor NOTIFY stateChanged)
     Q_PROPERTY(bool isClusterVisible READ isClusterVisible NOTIFY stateChanged)
     Q_PROPERTY(bool isInfotainmentVisible READ isInfotainmentVisible NOTIFY stateChanged)
     Q_PROPERTY(bool isSafeMode READ isSafeMode NOTIFY stateChanged)
@@ -33,7 +34,7 @@ public:
     explicit DashboardStateManager(QObject *parent = nullptr);
 
     QString currentState() const;
-    QString accentColor() const;
+    QColor accentColor() const;
     bool isClusterVisible() const;
     bool isInfotainmentVisible() const;
     bool isSafeMode() const { return m_state == State::SafeMode; }

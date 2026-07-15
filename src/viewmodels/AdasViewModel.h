@@ -2,7 +2,7 @@
 #define VIEWMODELS_ADASVIEWMODEL_H
 
 #include <QAbstractListModel>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 #include <core/AdasData.h>
 #include <core/IAdasProcessingStrategy.h>
 #include <memory>
@@ -12,7 +12,7 @@ namespace hmi {
 class AdasViewModel : public QAbstractListModel
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(int objectCount READ objectCount NOTIFY objectCountChanged)
     Q_PROPERTY(QString strategyName READ strategyName NOTIFY strategyChanged)

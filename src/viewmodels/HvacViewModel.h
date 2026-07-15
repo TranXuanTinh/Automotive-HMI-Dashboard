@@ -2,7 +2,7 @@
 #define VIEWMODELS_HVACVIEWMODEL_H
 
 #include <QObject>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 #include <core/HvacData.h>
 
 namespace hmi {
@@ -12,7 +12,7 @@ class IHvacController;
 class HvacViewModel : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(double driverTemp READ driverTemp NOTIFY stateChanged)
     Q_PROPERTY(double passengerTemp READ passengerTemp NOTIFY stateChanged)

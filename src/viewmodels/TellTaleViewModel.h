@@ -2,7 +2,7 @@
 #define VIEWMODELS_TELLTALEVIEWMODEL_H
 
 #include <QAbstractListModel>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 #include <core/VehicleData.h>
 #include <array>
 
@@ -11,7 +11,7 @@ namespace hmi {
 class TellTaleViewModel : public QAbstractListModel
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
 public:
     enum Roles {

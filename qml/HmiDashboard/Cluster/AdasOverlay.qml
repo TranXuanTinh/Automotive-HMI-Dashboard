@@ -1,4 +1,5 @@
-import QtQuick
+import QtQuick 2.15
+import HmiDashboard 1.0
 
 Item {
     id: root
@@ -20,12 +21,17 @@ Item {
             required property string className
             required property double confidence
             required property int trackId
-            required property string boxColor
+            required property color boxColor
 
             x: boxX * root.width
             y: boxY * root.height
             width: boxWidth * root.width
             height: boxHeight * root.height
+
+            Behavior on x { NumberAnimation { duration: Theme.animFast; easing.type: Easing.OutQuad } }
+            Behavior on y { NumberAnimation { duration: Theme.animFast; easing.type: Easing.OutQuad } }
+            Behavior on width { NumberAnimation { duration: Theme.animFast; easing.type: Easing.OutQuad } }
+            Behavior on height { NumberAnimation { duration: Theme.animFast; easing.type: Easing.OutQuad } }
 
             // Bounding box rectangle
             Rectangle {
@@ -34,9 +40,6 @@ Item {
                 border.width: 2
                 border.color: detection.boxColor
                 radius: 4
-
-                Behavior on x { NumberAnimation { duration: Theme.animFast } }
-                Behavior on y { NumberAnimation { duration: Theme.animFast } }
             }
 
             // Class label badge
@@ -48,9 +51,9 @@ Item {
                 width: labelText.width + 12
                 radius: 4
                 color: Qt.rgba(
-                           Qt.color(detection.boxColor).r,
-                           Qt.color(detection.boxColor).g,
-                           Qt.color(detection.boxColor).b, 0.85)
+                           detection.boxColor.r,
+                           detection.boxColor.g,
+                           detection.boxColor.b, 0.85)
 
                 Text {
                     id: labelText

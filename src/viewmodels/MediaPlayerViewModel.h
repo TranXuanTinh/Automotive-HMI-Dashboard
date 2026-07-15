@@ -2,7 +2,7 @@
 #define VIEWMODELS_MEDIAPLAYERVIEWMODEL_H
 
 #include <QObject>
-#include <QtQmlIntegration/qqmlintegration.h>
+
 #include <core/MediaData.h>
 
 namespace hmi {
@@ -12,7 +12,7 @@ class IMediaProvider;
 class MediaPlayerViewModel : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+
 
     Q_PROPERTY(QString title READ title NOTIFY trackChanged)
     Q_PROPERTY(QString artist READ artist NOTIFY trackChanged)

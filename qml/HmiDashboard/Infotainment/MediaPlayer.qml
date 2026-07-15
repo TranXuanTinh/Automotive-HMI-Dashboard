@@ -1,6 +1,7 @@
-import QtQuick
-import QtQuick.Layouts
-import HmiDashboard.Components
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
+import "../Components"
+import HmiDashboard 1.0
 
 Item {
     id: root

@@ -1,5 +1,6 @@
-import QtQuick
-import HmiDashboard.Components
+import QtQuick 2.15
+import "../Components"
+import HmiDashboard 1.0
 
 CircularGauge {
     id: root

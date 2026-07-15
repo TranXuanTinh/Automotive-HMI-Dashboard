@@ -1,4 +1,4 @@
-qt_add_library(hmi_viewmodels STATIC
+add_library(hmi_viewmodels STATIC
     SpeedViewModel.h
     SpeedViewModel.cpp
     RpmViewModel.h
@@ -28,8 +28,7 @@ target_link_libraries(hmi_viewmodels
     PUBLIC
         hmi_core
         hmi_services
-        Qt6::Core
+        Qt5::Core
     PRIVATE
-        Qt6::Quick
-        Qt6::QmlIntegration
+        Qt5::Quick
 )

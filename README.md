@@ -2,9 +2,9 @@
 
 <div align="center">
 
-**A comprehensive, safety-certified Automotive Human-Machine Interface built with Qt 6 / QML / C++17**
+**A comprehensive, safety-certified Automotive Human-Machine Interface built with Qt 5.15 / QML / C++17**
 
-[![Qt](https://img.shields.io/badge/Qt-6.5+-41CD52?logo=qt&logoColor=white)](https://www.qt.io/)
+[![Qt](https://img.shields.io/badge/Qt-5.15.13-41CD52?logo=qt&logoColor=white)](https://www.qt.io/)
 [![C++](https://img.shields.io/badge/C++-17-00599C?logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![CMake](https://img.shields.io/badge/CMake-3.16+-064F8C?logo=cmake&logoColor=white)](https://cmake.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -93,7 +93,7 @@ At its core, the project demonstrates how to build robust automotive software th
 | Component | Technology |
 |-----------|-----------|
 | **Language** | C++17 (backend), QML (frontend) |
-| **Framework** | Qt 6.5+ (Qt Quick, Qt Quick Controls) |
+| **Framework** | Qt 5.15.13 (Qt Quick, Qt Quick Controls) |
 | **Build System** | CMake 3.16+ |
 | **Rendering** | OpenGL via Qt Quick Scene Graph |
 | **Architecture** | MVVM + Observer + Strategy + State patterns |
@@ -182,7 +182,7 @@ HMI_QT/
 
 ### Prerequisites
 - **Ubuntu 24.04 LTS** (or compatible Linux)
-- **Qt 6.5+** (recommended: Qt 6.8 via [Qt Online Installer](https://www.qt.io/download-qt-installer))
+- **Qt 5.15.13** (recommended via [Qt Online Installer](https://www.qt.io/download-qt-installer))
 - **CMake 3.16+**
 - **GCC 11+** or **Clang 14+** (C++17 support required)
 - **GPU with OpenGL 3.0+** support
@@ -194,7 +194,7 @@ HMI_QT/
 cd /path/to/HMI_QT
 
 # Configure (adjust Qt path to your installation)
-cmake -B build -DCMAKE_PREFIX_PATH=$HOME/Qt/6.8.0/gcc_64
+cmake -B build -DCMAKE_PREFIX_PATH=$HOME/Qt/5.15.13/gcc_64
 
 # Build
 cmake --build build -j$(nproc)
@@ -300,6 +300,6 @@ This project is provided for educational and demonstration purposes.
 
 ## 🙏 Acknowledgments
 
-- **Qt Company** — Qt 6 framework and Qt AI Skills
+- **Qt Company** — Qt 5 framework and Qt AI Skills
 - **ISO 26262** — Automotive functional safety standard
 - **SAE J1850** — CRC polynomial for vehicle bus data integrity

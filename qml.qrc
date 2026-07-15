@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/HmiDashboard/Main.qml</file>
+        <file>qml/HmiDashboard/Theme.qml</file>
+        <file>qml/HmiDashboard/Components/CircularGauge.qml</file>
+        <file>qml/HmiDashboard/Components/GlowButton.qml</file>
+        <file>qml/HmiDashboard/Components/GradientBar.qml</file>
+        <file>qml/HmiDashboard/Cluster/InstrumentCluster.qml</file>
+        <file>qml/HmiDashboard/Cluster/Speedometer.qml</file>
+        <file>qml/HmiDashboard/Cluster/Tachometer.qml</file>
+        <file>qml/HmiDashboard/Cluster/TellTales.qml</file>
+        <file>qml/HmiDashboard/Cluster/TellTaleIndicator.qml</file>
+        <file>qml/HmiDashboard/Cluster/AdasOverlay.qml</file>
+        <file>qml/HmiDashboard/Infotainment/InfotainmentPanel.qml</file>
+        <file>qml/HmiDashboard/Infotainment/HvacPanel.qml</file>
+        <file>qml/HmiDashboard/Infotainment/MediaPlayer.qml</file>
+        <file>qml/HmiDashboard/Infotainment/VehicleSettings.qml</file>
+        <file>qml/HmiDashboard/assets/vinfast_vf8.png</file>
+    </qresource>
+</RCC>

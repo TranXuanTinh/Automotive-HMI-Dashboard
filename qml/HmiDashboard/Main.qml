@@ -1,8 +1,9 @@
-import QtQuick
-import QtQuick.Window
-import QtQuick.Layouts
-import HmiDashboard.Cluster
-import HmiDashboard.Infotainment
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Layouts 1.15
+import "Cluster"
+import "Infotainment"
+import HmiDashboard 1.0
 
 Window {
     id: root

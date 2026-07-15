@@ -1,4 +1,4 @@
-qt_add_library(hmi_services STATIC
+add_library(hmi_services STATIC
     SimulatedCanBus.h
     SimulatedCanBus.cpp
     SimulatedAdasPipeline.h
@@ -22,5 +22,5 @@ target_link_libraries(hmi_services
     PUBLIC
         hmi_core
     PRIVATE
-        Qt6::Core
+        Qt5::Core
 )
