@@ -27,6 +27,11 @@ At its core, the project demonstrates how to build robust automotive software th
 
 <div align="center">
 
+<img src="docs/Result.gif" width="800" alt="Automotive HMI Dashboard Demo"/>
+
+<br/>
+<br/>
+
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Automotive HMI Dashboard                         │
